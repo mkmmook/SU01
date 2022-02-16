@@ -1,7 +1,7 @@
 [
     {
         "index": 0,
-        "name": "Binance Coin",
+        "value": "Binance Coin",
         "symbol": "BNB",
         "currency": "USD",
         "status": "available"

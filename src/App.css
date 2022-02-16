@@ -18,7 +18,16 @@ body {
   background-color: #16162a;
 }
 
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: 
+    'left'
+    'right';
+}
+
 .SlideBar {
+  grid-area: left;
   /* font-family: "Poppins", sans-serif; */
   color: #f3f3f3;
   padding: 96px;
@@ -56,6 +65,7 @@ body {
 }
 
 .container-right {
+  grid-area: right;
   position: static;
   width: 880px;
   height: 1024px;
@@ -140,3 +150,9 @@ body {
   flex-grow: 0;
   margin: 0px 16px;
 }
+
+/* .Select{
+  width:'100%';
+  background: #16162a;
+  
+} */
