@@ -5,7 +5,7 @@ import "./dropdown.css";
 import Predict from "./component/Predict";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
     <>
       <Router>
