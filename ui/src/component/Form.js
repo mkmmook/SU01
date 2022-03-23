@@ -56,7 +56,7 @@ const Form = (props) => {
             </div>
           </div>
         </div>
-        {/* right */}
+        right
         <div className="col-8">
           <div className="container-right">
             <div>

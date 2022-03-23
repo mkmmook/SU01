@@ -3,6 +3,7 @@ import axios from "axios";
 import { Line } from "react-chartjs-2";
 import logo from "./logo.png";
 import { Link } from "react-router-dom";
+import { Chart as ChartJS } from "chart.js/auto";
 
 const Predict = () => {
   const [APIData, setAPIData] = useState([]);
@@ -102,8 +103,6 @@ const Predict = () => {
         })
         .catch((err) => console.log(err))
     );
-
-    // fetchResult();
   }, []);
 
   return (
@@ -125,8 +124,6 @@ const Predict = () => {
           </svg>
         </button>
       </Link>
-      <div className="arrow"></div>
-
       <div className="CryptoPair">
         {" "}
         {/* {APIData.map((data) => {
@@ -143,7 +140,7 @@ const Predict = () => {
       </div>
       <img src={logo} className="logo" alt="logo" />
       <div className="content">
-        {/* <Line data={lineChart} /> */}
+        <Line data={lineChart} />
         <>
           <br></br>
           <div className="panel-body table-responsive">
