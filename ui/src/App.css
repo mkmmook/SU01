@@ -152,9 +152,9 @@ body {
 
 .custom-select select {
   background: #16162a;
-  width: 100%;
+  /* width: 100%; */
   color: #f3f3f3;
-  border: 1px solid #52526B;
+  border: 1px solid #52526b;
   box-sizing: border-box;
   border-radius: 6px;
 
@@ -174,13 +174,120 @@ body {
   align-self: stretch;
   flex-grow: 0;
   margin: 8px 0px;
+
+  width: 624px;
+  height: 35px;
+  left: 32px;
+  top: 106px;
 }
 
-/* .custom-select {
-  width: "200px";
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 45%;
+}
+
+.table-responsive {
+  max-height: 300px;
+}
+
+.header {
+  position: sticky;
+  top:0;
   background: #16162a;
-  border: #52526b;
-  box-sizing: border-box;
-  border-radius: 6px;
-  color: #f3f3f3;
-} */
+}
+
+.content {
+  position: absolute;
+  width: 1144px;
+  height: 615px;
+  left: calc(50% - 1144px / 2 + 5px);
+  top: 247px;
+}
+
+.graph {
+  position: absolute;
+  width: 1144px;
+  height: 615px;
+  left: calc(50% - 1144px / 2 + 5px);
+  top: 247px;
+}
+
+.backdrop {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  background: linear-gradient(
+    241.25deg,
+    rgba(41, 39, 85, 0.35) 4.4%,
+    rgba(41, 39, 84, 0.78) 61.77%,
+    rgba(27, 24, 66, 0.35) 119.94%
+  );
+  box-shadow: 0px 51px 69px rgba(23, 18, 43, 0.585739);
+  backdrop-filter: blur(23px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 10px;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: absolute;
+  width: 688px;
+  height: 56px;
+  left: 153px;
+  top: 169px;
+}
+.logo {
+  position: absolute;
+  width: 133.4px;
+  height: 100px;
+  left: 653px;
+  top: 45px;
+}
+
+.CryptoPair {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 13px;
+
+  position: absolute;
+  width: 92px;
+  height: 37px;
+  left: 150px;
+  top: 117px;
+
+  background: #2c2a53;
+  border-radius: 10px;
+}
+
+.back {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 39px;
+  top: 45px;
+
+  background: #2d2346;
+  mix-blend-mode: normal;
+  border: 1px solid #24204d;
+  border-radius: 100px;
+}
+.arrow {
+  position: absolute;
+  width: 13px;
+  height: 7.8px;
+  left: calc(50% - 13px / 2 + 9.7px);
+  top: calc(50% - 7.8px / 2 - 2.6px);
+
+  transform: rotate(90deg);
+}

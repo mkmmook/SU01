@@ -1,51 +1,36 @@
-import React, { useState, CSSProperties, useEffect } from "react";
+import React, { useState } from "react";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-// import Select from "react-select";
 import { Link } from "react-router-dom";
 import logo from "./logo.png";
 import alert from "./alter.png";
 import axios from "axios";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import "react-datepicker/dist/react-datepicker.css";
+import { createMuiTheme } from '@material-ui/core'
 
 const Form = (props) => {
   const [selectedDate, handleDateChange] = useState(new Date());
   const [selectFromDate, handFromDateChange] = useState(new Date());
   const [token, setToken] = useState(" ");
-  const [prediction,setPrediction] = useState();
-
-  const runPred = async (token, selectedDate, selectFromDate) =>{
-    const res = await axios.post(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`, {
-      token,
-      selectedDate,
-      selectFromDate,
-    });
-    console.log(res)
-  }
-  const materialTheme = createMuiTheme({
-    overrides: {
-      MuiPickersToolbar: {
-        toolbar: {
-          backgroundColor: "#16162a",
-          color: "#16162a",
-        },
-      },
-      MuiPickersCalendarHeader: {
-        switchHeader: {
-          backgroundColor: "white",
-          color: "#1b5e20",
-        },
-      },
-    },
-  });
-
-  const handleChange = (e) => {
-    setToken(e.target.value);
+  const muiTheme = createMuiTheme({
+    palette: {
+      type: "dark"
+    }
+  })
+  const runPred = async (token, selectedDate, selectFromDate) => {
+    const res = await axios.post(
+      `https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`,
+      {
+        token,
+        selectedDate,
+        selectFromDate,
+      }
+    );
+    console.log(res);
   };
 
   return (
@@ -96,12 +81,6 @@ const Form = (props) => {
                         Binance Coin
                       </option>
                     </select>
-                    {/* <Select
-                      id="select"
-                      options={options}
-                      onChange={handleChange}
-                    /> */}
-                    {/* <span style={groupBadgeStyles}>{data.options.length}</span> */}
                     <div className="linear"></div>
                   </div>
                   <div>
@@ -113,25 +92,26 @@ const Form = (props) => {
                     <br></br>
                   </div>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <ThemeProvider theme={materialTheme}>
+                    <ThemeProvider theme={muiTheme}>
                       <KeyboardDatePicker
                         clearable
                         value={selectedDate}
-                        placeholder="10/10/2018"
+                        format="MM/dd/yyyy"
                         onChange={(date) => handleDateChange(date)}
-                        minDate={new Date()}
                         format="MM/dd/yyyy"
                         label="From"
+                        style={{width:"46%"}}
                       />
                       &emsp;
                       <KeyboardDatePicker
                         clearable
                         value={selectFromDate}
-                        placeholder="10/10/2018"
+                        placeholder="selectdate"
                         onChange={(date) => handFromDateChange(date)}
-                        minDate={new Date()}
                         format="MM/dd/yyyy"
                         label="To"
+                        style={{width:"46%"}}
+
                       />
                     </ThemeProvider>
                   </MuiPickersUtilsProvider>{" "}
@@ -140,7 +120,6 @@ const Form = (props) => {
               <Link to="/Predict">
                 <button
                   className="button"
-                  // onClick={() => history.push("/Predict")}
                   onClick={(e) => runPred(token, selectedDate, selectFromDate)}
                   type="submit"
                 >
