@@ -10,7 +10,7 @@ import logo from "./logo.png";
 import alert from "./alter.png";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import { createMuiTheme } from '@material-ui/core'
+import { createMuiTheme } from "@material-ui/core";
 
 const Form = (props) => {
   const [selectedDate, handleDateChange] = useState(new Date());
@@ -18,9 +18,9 @@ const Form = (props) => {
   const [token, setToken] = useState(" ");
   const muiTheme = createMuiTheme({
     palette: {
-      type: "dark"
-    }
-  })
+      type: "dark",
+    },
+  });
   const runPred = async (token, selectedDate, selectFromDate) => {
     const res = await axios.post(
       `https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`,
@@ -36,6 +36,7 @@ const Form = (props) => {
   return (
     <header className="body">
       <div className="grid">
+        {/* leftside */}
         <div className="SlideBar">
           <img src={logo} className="App-logo" alt="logo" />
           <figure class="text-center">
@@ -55,7 +56,7 @@ const Form = (props) => {
             </div>
           </div>
         </div>
-
+        {/* right */}
         <div className="col-8">
           <div className="container-right">
             <div>
@@ -100,7 +101,7 @@ const Form = (props) => {
                         onChange={(date) => handleDateChange(date)}
                         format="MM/dd/yyyy"
                         label="From"
-                        style={{width:"46%"}}
+                        style={{ width: "46%" }}
                       />
                       &emsp;
                       <KeyboardDatePicker
@@ -110,8 +111,7 @@ const Form = (props) => {
                         onChange={(date) => handFromDateChange(date)}
                         format="MM/dd/yyyy"
                         label="To"
-                        style={{width:"46%"}}
-
+                        style={{ width: "46%" }}
                       />
                     </ThemeProvider>
                   </MuiPickersUtilsProvider>{" "}
