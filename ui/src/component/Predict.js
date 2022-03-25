@@ -1,4 +1,4 @@
-import React, {  useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
 import logo from "./logo.png";
@@ -20,21 +20,21 @@ const Predict = () => {
   gradientStroke2.addColorStop(0.5, "#4DB9F7");
   gradientStroke2.addColorStop(0, "#4DA1FF");
 
-  useEffect(() => {
-    axios
-      .get(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`)
-      .then((response) => {
-        setAPIData(response.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("/predict", {method: "POST"})
+  //     .then((res) => {
+  //       setAPIData(res.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   useEffect(() => {
-    fetch("/predict", {method: "GET"}).then((res) =>
+    fetch("/predict", { method: "POST" }).then((res) =>
       res
         .json()
         .then((data) => {
-          console.log(data);
+          console.log(data.name);
           setResult(data);
           setLineChart({
             labels: data && data.map((crypto) => crypto.Timestamp),
@@ -99,7 +99,6 @@ const Predict = () => {
               },
             },
           });
-          setLineChart.refresh()
         })
         .catch((err) => console.log(err))
     );
@@ -125,10 +124,11 @@ const Predict = () => {
         </button>
       </Link>
       <div className="CryptoPair">
-        {" "}
-        {/* {APIData.map((data) => {
-          return <tr>Token: {data.token}</tr>;
-        })}{" "} */}
+        {/* {" "}
+        {result &&
+          result.map((data) => {
+            return <tr>Token:{data.name}</tr>;
+          })}{" "} */}
         BNB/USD
       </div>
       <div className="dashboard">
@@ -139,8 +139,27 @@ const Predict = () => {
         </figcaption>
       </div>
       <img src={logo} className="logo" alt="logo" />
+      <div>
+        <div className="percent">PERCENTAGE ERROR</div>
+        <div className="color1">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.98609 1.39058C7.43512 0.00861163 9.39023 0.00860965 9.83926 1.39058L10.7701 4.25532C10.9709 4.87336 11.5468 5.2918 12.1967 5.2918H15.2088C16.6619 5.2918 17.2661 7.15122 16.0905 8.00532L13.6536 9.77583C13.1279 10.1578 12.9079 10.8348 13.1087 11.4529L14.0395 14.3176C14.4885 15.6996 12.9068 16.8488 11.7313 15.9947L9.29436 14.2242C8.76863 13.8422 8.05673 13.8422 7.531 14.2242L5.0941 15.9947C3.91853 16.8488 2.33681 15.6996 2.78584 14.3176L3.71665 11.4529C3.91746 10.8348 3.69748 10.1578 3.17174 9.77583L0.734848 8.00532C-0.440722 7.15122 0.163441 5.2918 1.61653 5.2918H4.6287C5.27853 5.2918 5.85447 4.87336 6.05528 4.25532L6.98609 1.39058Z"
+                fill="#F5E023"
+              />
+            </svg>
+        </div>
+        <div className="model">MODEL ACCURACY</div>
+        <div className="color2"/>
+      </div>{" "}
       <div className="content">
-        <Line data={lineChart} />
+        {/* <Line data={lineChart} /> */}
         <>
           <br></br>
           <div className="panel-body table-responsive">

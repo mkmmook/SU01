@@ -11,23 +11,32 @@ import alert from "./alter.png";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import { createMuiTheme } from "@material-ui/core";
+import { Row, Col, Container } from "react-bootstrap";
 
 const Form = (props) => {
   const [selectedDate, handleDateChange] = useState(new Date());
   const [selectFromDate, handFromDateChange] = useState(new Date());
   const [token, setToken] = useState(" ");
+  const [to, setTo] = useState(" ");
+  const [from, setFrom] = useState(" ");
+
   const muiTheme = createMuiTheme({
     palette: {
       type: "dark",
     },
   });
+
   const runPred = async (token, selectedDate, selectFromDate) => {
     const res = await axios.post(
-      `https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`,
+      // `https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`,
+      "/predict",
       {
+        method: "POST",
         token,
         selectedDate,
         selectFromDate,
+        from,
+        to,
       }
     );
     console.log(res);
@@ -56,7 +65,6 @@ const Form = (props) => {
             </div>
           </div>
         </div>
-        right
         <div className="col-8">
           <div className="container-right">
             <div>
@@ -75,10 +83,10 @@ const Form = (props) => {
                   Select
                   <div className="custom-select">
                     <select onChange={(e) => setToken(e.target.value)}>
-                      <option label="BTC" name="Bitcoin">
+                      <option label="BTC" name="token">
                         Bitcoin
                       </option>
-                      <option label="BNB" name="Binance Coin">
+                      <option label="BNB" name="token">
                         Binance Coin
                       </option>
                     </select>
@@ -92,14 +100,13 @@ const Form = (props) => {
                     <br></br>
                     <br></br>
                   </div>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <ThemeProvider theme={muiTheme}>
                       <KeyboardDatePicker
                         clearable
                         value={selectedDate}
-                        format="MM/dd/yyyy"
+                        format="dd/MM/yyyy"
                         onChange={(date) => handleDateChange(date)}
-                        format="MM/dd/yyyy"
                         label="From"
                         style={{ width: "46%" }}
                       />
@@ -109,18 +116,37 @@ const Form = (props) => {
                         value={selectFromDate}
                         placeholder="selectdate"
                         onChange={(date) => handFromDateChange(date)}
-                        format="MM/dd/yyyy"
+                        format="dd/MM/yyyy"
                         label="To"
                         style={{ width: "46%" }}
                       />
                     </ThemeProvider>
-                  </MuiPickersUtilsProvider>{" "}
+                  </MuiPickersUtilsProvider>{" "} */}
+                </div>
+                <div className="cal">
+                  <input
+                    className="from"
+                    type="input"
+                    name="from"
+                    placeholder="dd/MM/yyyy"
+                    onChange={(e) => setFrom(e.target.value)}
+                  />
+                  &emsp;
+                  <input
+                    className="to"
+                    type="input"
+                    name="to"
+                    placeholder="dd/MM/yyyy"
+                    onChange={(e) => setTo(e.target.value)}
+                  />
                 </div>
               </div>
               <Link to="/Predict">
                 <button
                   className="button"
-                  onClick={(e) => runPred(token, selectedDate, selectFromDate)}
+                  onClick={(e) =>
+                    runPred(token, selectedDate, selectFromDate, to, from)
+                  }
                   type="submit"
                 >
                   Predict

@@ -189,7 +189,8 @@ th {
   left: 0;
   right: 0;
   width: 1000px;
-  height: 50px;}
+  height: 50px;
+}
 
 .table-responsive {
   max-height: 400px;
@@ -197,7 +198,7 @@ th {
 
 .header {
   position: sticky;
-  top:0;
+  top: 0;
   background: #16162a;
 }
 
@@ -284,4 +285,162 @@ th {
   mix-blend-mode: normal;
   border: 1px solid #24204d;
   border-radius: 100px;
+}
+
+.percent {
+  position: absolute;
+  width: 189px;
+  height: 61px;
+  left: 930px;
+  top: 161px;
+}
+
+.color1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px;
+
+  position: absolute;
+  width: 189px;
+  height: 38px;
+  left: 905px;
+  top: 184px;
+
+  background: linear-gradient(90deg, #fb4969 0%, #4566db 100%);
+  border-radius: 10px;
+}
+
+.color2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px;
+
+  position: absolute;
+  width: 189px;
+  height: 38px;
+  left: 1108px;
+  top: 184px;
+
+  background: linear-gradient(90deg, #58a75b 0%, #4566db 100%);
+  border-radius: 10px;
+}
+
+.model {
+  position: absolute;
+  width: 189px;
+  height: 61px;
+  left: 1138px;
+  top: 161px;
+}
+
+.from {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 16px 8px 0px;
+
+  position: static;
+  width: 296px;
+  height: 44px;
+  left: 0px;
+  top: 0px;
+
+  background: #16162a;
+  color: #f3f3f3;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0px 0px;
+}
+
+.to {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 16px 8px 0px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+
+  position: static;
+  width: 296px;
+  height: 44px;
+  left: 0px;
+  top: 0px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0px 0px;
+  background: #16162a;
+  /* width: 100%; */
+  color: #f3f3f3;
+}
+
+.cal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: static;
+  width: 624px;
+  height: 70px;
+  left: 32px;
+  top: 282px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 32px 0px;
+}
+
+::placeholder {
+  color: #f3f3f3;
+  text-align: center;
+}
+
+.fromheader {
+  position: static;
+  height: 18px;
+  left: 0%;
+  right: 0%;
+  top: calc(50% - 18px / 2 + 8.5px);
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  /* identical to box height, or 138% */
+
+  display: flex;
+  align-items: center;
+
+  /* Dark/Basic/Primary */
+
+  color: #f3f3f3;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 8px 0px;
 }
