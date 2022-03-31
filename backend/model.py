@@ -13,12 +13,12 @@ import os
 import pprint
 import tensorflow as tf
 
-def predict(currency,fromDate,toDate):
+def predict(currency, fromDate, toDate):
     #DATA INGESTION
     data = investpy.get_crypto_historical_data(crypto=currency, from_date=fromDate, to_date=toDate)
     #print(data)
     data.to_csv('historical_data.csv')
-
+    print(currency)
     #DATA PRE-PROCESSING
     data = pd.read_csv('historical_data.csv')
     # print(data)
@@ -74,10 +74,11 @@ def predict(currency,fromDate,toDate):
         test_label[j - len_t] = test_label[j - len_t] * temp + temp
         predicted[j - len_t] = predicted[j - len_t] * temp + temp
 
+    fd = fromDate.split('/')
     #RESULT PREPARATION TO EXPORT
     import datetime
     df = pd.DataFrame(data).copy()
-    datelist = pd.date_range(datetime.datetime(2019, 10, 1).strftime('%Y-%m-%d'), periods=df.shape[0]).tolist()
+    datelist = pd.date_range(datetime.datetime(int(fd[2]), int(fd[1]), int(fd[0])).strftime('%Y-%m-%d'), periods=df.shape[0]).tolist()
     df['Timestamp'] = datelist 
     df = df.set_index(['Timestamp'])
     df['Actual'] = df['Close']

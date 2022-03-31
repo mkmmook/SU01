@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -19,6 +19,8 @@ const Form = (props) => {
   const [token, setToken] = useState(" ");
   const [to, setTo] = useState(" ");
   const [from, setFrom] = useState(" ");
+  const [a, setA] = useState("");
+  const [result, setResult] = useState();
 
   const muiTheme = createMuiTheme({
     palette: {
@@ -26,22 +28,21 @@ const Form = (props) => {
     },
   });
 
-  const runPred = async (token, selectedDate, selectFromDate) => {
-    const res = await axios.post(
-      // `https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`,
-      "/predict",
-      {
-        method: "POST",
-        token,
-        selectedDate,
-        selectFromDate,
-        from,
-        to,
-      }
-    );
-    console.log(res);
+  var myParams = {
+    data: token,
   };
 
+  useEffect(() => {
+    fetch("/predict", { method: "POST" }).then((res) =>
+      res
+        .json()
+        .then((data) => {
+          console.log(data);
+          setResult(data);
+        })
+        .catch((err) => console.log(err))
+    );
+  }, []);
   return (
     <header className="body">
       <div className="grid">
@@ -67,7 +68,8 @@ const Form = (props) => {
         </div>
         <div className="col-8">
           <div className="container-right">
-            <div>
+            {/* <form onSubmit = {handleSubmit}> */}
+            <form>
               <blockquote className="blockquote" class="fs-1">
                 <p>Get Started</p>
               </blockquote>
@@ -82,11 +84,15 @@ const Form = (props) => {
                 <div>
                   Select
                   <div className="custom-select">
-                    <select onChange={(e) => setToken(e.target.value)}>
-                      <option label="BTC" name="token">
+                    <select
+                      onChange={(e) => setToken(e.target.value)}
+                      value={token}
+                      id="token"
+                    >
+                      <option label="BTC" name="bitcoin">
                         Bitcoin
                       </option>
-                      <option label="BNB" name="token">
+                      <option label="BNB" name="ethereum">
                         Binance Coin
                       </option>
                     </select>
@@ -98,51 +104,32 @@ const Form = (props) => {
                       When the duration change, the prediction is recalculated{" "}
                     </small>
                     <br></br>
-                    <br></br>
                   </div>
-                  {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <ThemeProvider theme={muiTheme}>
-                      <KeyboardDatePicker
-                        clearable
-                        value={selectedDate}
-                        format="dd/MM/yyyy"
-                        onChange={(date) => handleDateChange(date)}
-                        label="From"
-                        style={{ width: "46%" }}
-                      />
-                      &emsp;
-                      <KeyboardDatePicker
-                        clearable
-                        value={selectFromDate}
-                        placeholder="selectdate"
-                        onChange={(date) => handFromDateChange(date)}
-                        format="dd/MM/yyyy"
-                        label="To"
-                        style={{ width: "46%" }}
-                      />
-                    </ThemeProvider>
-                  </MuiPickersUtilsProvider>{" "} */}
                 </div>
                 <div className="cal">
                   <input
-                    className="from"
-                    type="input"
-                    name="from"
-                    placeholder="dd/MM/yyyy"
+                    className="form-control"
+                    placeholder="from"
+                    rows="6"
+                    value={from}
                     onChange={(e) => setFrom(e.target.value)}
-                  />
-                  &emsp;
+                    required
+                  ></input>
+                  <label htmlFor="body" className="form-label">
+                    To
+                  </label>
                   <input
-                    className="to"
-                    type="input"
-                    name="to"
-                    placeholder="dd/MM/yyyy"
+                    className="form-control"
+                    placeholder="to"
+                    rows="6"
+                    value={to}
                     onChange={(e) => setTo(e.target.value)}
-                  />
+                    required
+                  ></input>
                 </div>
               </div>
-              <Link to="/Predict">
-                <button
+              <Link>
+                {/* <button
                   className="button"
                   onClick={(e) =>
                     runPred(token, selectedDate, selectFromDate, to, from)
@@ -150,9 +137,43 @@ const Form = (props) => {
                   type="submit"
                 >
                   Predict
+                </button> */}
+                <button
+                  className="button"
+                  id="button"
+                  onClick={async () => {
+                    const inputData = { token, from, to };
+                    const res = await fetch("/predict", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(inputData),
+                    })
+                      .then((response) => response.json())
+                      .then((data) => setToken(data))
+                      .catch((error) => console.log(error));
+                    // if (res.ok) {
+                    //   console.log("response worked!");
+                    //   // onNewToken(inputData);
+                    //   setToken("");
+                    //   setTo("");
+                    //   setFrom("");
+                    // }
+                  }}
+                >
+                  Predict
                 </button>
               </Link>
-            </div>
+              {result &&
+                result.map((f) => (
+                  <tr key={f}>
+                    <td>{f.Timestamp}</td>
+                    <td>{f.Actual}</td>
+                    <td>{f.Predicted}</td>
+                  </tr>
+                ))}
+            </form>
           </div>
         </div>
       </div>

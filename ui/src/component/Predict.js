@@ -5,7 +5,7 @@ import logo from "./logo.png";
 import { Link } from "react-router-dom";
 import { Chart as ChartJS } from "chart.js/auto";
 
-const Predict = () => {
+const Predict = (props) => {
   const [APIData, setAPIData] = useState([]);
   const [result, setResult] = useState();
   const [lineChart, setLineChart] = useState();
@@ -20,21 +20,13 @@ const Predict = () => {
   gradientStroke2.addColorStop(0.5, "#4DB9F7");
   gradientStroke2.addColorStop(0, "#4DA1FF");
 
-  // useEffect(() => {
-  //   axios
-  //     .get("/predict", {method: "POST"})
-  //     .then((res) => {
-  //       setAPIData(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
 
   useEffect(() => {
-    fetch("/predict", { method: "POST" }).then((res) =>
+    fetch("/predict", { method: "GET" }).then((res) =>
       res
         .json()
         .then((data) => {
-          console.log(data.name);
+          console.log(data);
           setResult(data);
           setLineChart({
             labels: data && data.map((crypto) => crypto.Timestamp),
@@ -105,8 +97,9 @@ const Predict = () => {
   }, []);
 
   return (
+    
     <header className="Body">
-      <Link to="/">
+      <Link to="/Test">
         <button className="back" type="submit">
           {" "}
           <svg
@@ -124,12 +117,12 @@ const Predict = () => {
         </button>
       </Link>
       <div className="CryptoPair">
-        {/* {" "}
-        {result &&
+        {" "}
+        {/* {result &&
           result.map((data) => {
-            return <tr>Token:{data.name}</tr>;
+            return <tr>{data}</tr>;
           })}{" "} */}
-        BNB/USD
+        ETH/USD
       </div>
       <div className="dashboard">
         <h2>Dashboard</h2>
