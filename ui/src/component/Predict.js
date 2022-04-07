@@ -4,11 +4,13 @@ import { Line } from "react-chartjs-2";
 import logo from "./logo.png";
 import { Link } from "react-router-dom";
 import { Chart as ChartJS } from "chart.js/auto";
+import { useLocation } from "react-router-dom";
 
-const Predict = (props) => {
-  const [APIData, setAPIData] = useState([]);
+const Predict = ({  }) => {
+  const [APIData, setAPIData] = useState();
   const [result, setResult] = useState();
   const [lineChart, setLineChart] = useState();
+  const [value, setvalue] = useState("");
 
   const ctx = document.getElementById("myChart").getContext("2d");
   const gradientStroke1 = ctx.createLinearGradient(500, 0, 100, 0);
@@ -19,7 +21,6 @@ const Predict = (props) => {
   gradientStroke2.addColorStop(1, "#00FF42");
   gradientStroke2.addColorStop(0.5, "#4DB9F7");
   gradientStroke2.addColorStop(0, "#4DA1FF");
-
 
   useEffect(() => {
     fetch("/predict", { method: "GET" }).then((res) =>
@@ -96,10 +97,22 @@ const Predict = (props) => {
     );
   }, []);
 
+  useEffect(() => {
+    fetch("/predict", { method: "POST" }).then((res) =>
+      res
+        .json()
+        .then((data) => {
+          console.log(data);
+          setvalue(data);
+        })
+        .catch((err) => console.log(err))
+    );
+  }, []);
+
+
   return (
-    
     <header className="Body">
-      <Link to="/Test">
+      <Link to="/">
         <button className="back" type="submit">
           {" "}
           <svg
@@ -116,14 +129,14 @@ const Predict = (props) => {
           </svg>
         </button>
       </Link>
-      <div className="CryptoPair">
+      {/* <div className="CryptoPair">
         {" "}
-        {/* {result &&
+        {result &&
           result.map((data) => {
             return <tr>{data}</tr>;
-          })}{" "} */}
+          })}{" "}
         ETH/USD
-      </div>
+      </div> */}
       <div className="dashboard">
         <h2>Dashboard</h2>
         <br></br>
@@ -132,7 +145,7 @@ const Predict = (props) => {
         </figcaption>
       </div>
       <img src={logo} className="logo" alt="logo" />
-      <div>
+      {/* <div>
         <div className="percent">PERCENTAGE ERROR</div>
         <div className="color1">
             <svg
@@ -150,7 +163,8 @@ const Predict = (props) => {
         </div>
         <div className="model">MODEL ACCURACY</div>
         <div className="color2"/>
-      </div>{" "}
+      </div>{" "} */}
+      {value.currency}
       <div className="content">
         {/* <Line data={lineChart} /> */}
         <>

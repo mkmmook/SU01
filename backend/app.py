@@ -8,10 +8,10 @@ from urllib import response
 from flask import Flask, render_template, request, jsonify, current_app
 from itsdangerous import json
 from reverseProxy import proxyRequest
-from pandas import read_csv
+from pandas import read_csv, read_json, concat
 from model import predict
 import logging as logger
-import requests
+import json
 
 MODE = os.getenv('FLASK_ENV')
 DEV_SERVER_URL = 'http://localhost:3000/'
@@ -38,15 +38,14 @@ def display():
         currency  = request.json['token']
         fromDate = request.json['from']
         toDate = request.json['to']
+        # print(currency)
         predict(currency, fromDate, toDate)
-        return currency
+        return "None"
     if request.method == "GET":
-        # predict(currency, fromDate, toDate)
         data = read_csv('predicted_result.csv')    
-        df = data.to_json(orient="records")
-        return df
-
-# @app.route('/result', methods = ["GET"])
-# def result():
-#     return jsonify(currency)
+        df1 = data.to_json(orient="records")
+        # df2 = read_json('/Users/pcm/Documents/GitHub/frontend/backend/app.py')
+        # print(df2)
+        # df = concat([df1,df2])
+        return df1
 

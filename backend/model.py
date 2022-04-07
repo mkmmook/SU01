@@ -17,10 +17,10 @@ def predict(currency, fromDate, toDate):
     #DATA INGESTION
     data = investpy.get_crypto_historical_data(crypto=currency, from_date=fromDate, to_date=toDate)
     #print(data)
-    data.to_csv('historical_data.csv')
+    # data.to_csv('historical_data.csv')
     print(currency)
     #DATA PRE-PROCESSING
-    data = pd.read_csv('historical_data.csv')
+    # data = pd.read_csv('historical_data.csv')
     # print(data)
     # print(data.shape)
     # print(data.size)
@@ -29,12 +29,12 @@ def predict(currency, fromDate, toDate):
     X = []
     Y = []
     for i in range(0 , last_index):
-        first = data.iloc[i, 4] #get every value from column 4 or data.['Close']
+        first = data.iloc[i, 3] #get every value from column 4 or data.['Close']
         tempX = []
         tempY = []
         for j in range(n_steps): #convert into data of shape [n_steps,1]
-            tempX.append((data.iloc[i + j, 4] - first) / first) # assign n_steps datapoints to X
-        tempY.append((data.iloc[i + n_steps, 4] - first) / first) # assign n_step+1 datapoint (or the next datapoint from last value in X) to Y 
+            tempX.append((data.iloc[i + j, 3] - first) / first) # assign n_steps datapoints to X
+        tempY.append((data.iloc[i + n_steps, 3] - first) / first) # assign n_step+1 datapoint (or the next datapoint from last value in X) to Y 
         X.append(np.array(tempX).reshape(n_steps, 1)) #reshape is transpose the dimension
         Y.append(np.array(tempY).reshape(1,1)) #reshape is transpose the dimension
     train_X,test_X,train_label,test_label = train_test_split(X, Y, train_size=0.75, shuffle=False)
@@ -70,7 +70,7 @@ def predict(currency, fromDate, toDate):
     test_label = (test_label[:,0])
     predicted = np.array(predicted[:,0]).reshape(-1,1)
     for j in range(len_t , len_t + len(test_X)):
-        temp = data.iloc[j,4]
+        temp = data.iloc[j,3]
         test_label[j - len_t] = test_label[j - len_t] * temp + temp
         predicted[j - len_t] = predicted[j - len_t] * temp + temp
 
@@ -84,7 +84,7 @@ def predict(currency, fromDate, toDate):
     df['Actual'] = df['Close']
     df['Predicted'] = df['Close']
     df.iloc[-predicted.size:,-1:] = predicted
-    df = df.drop(['Date', 'Currency', 'Open', 'Close', 'High', 'Low', 'Volume'], axis = 1)
+    df = df.drop( ['Currency', 'Open', 'Close', 'High', 'Low', 'Volume'], axis = 1)
     print(df)
     df.to_csv('predicted_result.csv')
     return None

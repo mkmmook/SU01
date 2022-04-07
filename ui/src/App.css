@@ -134,7 +134,7 @@ body {
   padding: 0px 24px;
 
   position: static;
-  width: 125px;
+  width: 150px;
   height: 48px;
   left: calc(50% - 125px / 2 - 281.5px);
   top: 0px;
@@ -150,7 +150,7 @@ body {
   margin: 0px 16px;
 }
 
-.custom-select select {
+.custom-select {
   background: #16162a;
   /* width: 100%; */
   color: #f3f3f3;
@@ -179,6 +179,12 @@ body {
   height: 35px;
   left: 32px;
   top: 106px;
+}
+
+.form-control{
+  background: #16162a;
+  border: 1px solid #52526b;
+  color: #f3f3f3;
 }
 
 td,
@@ -397,9 +403,9 @@ th {
 
   position: static;
   width: 624px;
-  height: 70px;
+  height: 0px;
   left: 32px;
-  top: 282px;
+  top: 26px;
 
   /* Inside auto layout */
 

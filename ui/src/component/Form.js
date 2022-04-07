@@ -32,17 +32,17 @@ const Form = (props) => {
     data: token,
   };
 
-  useEffect(() => {
-    fetch("/predict", { method: "POST" }).then((res) =>
-      res
-        .json()
-        .then((data) => {
-          console.log(data);
-          setResult(data);
-        })
-        .catch((err) => console.log(err))
-    );
-  }, []);
+  // useEffect(() => {
+  //   fetch("/predict", { method: "POST" }).then((res) =>
+  //     res
+  //       .json()
+  //       .then((data) => {
+  //         console.log(data);
+  //         setResult(data);
+  //       })
+  //       .catch((err) => console.log(err))
+  //   );
+  // }, []);
   return (
     <header className="body">
       <div className="grid">
@@ -165,14 +165,14 @@ const Form = (props) => {
                   Predict
                 </button>
               </Link>
-              {result &&
+              {/* {result &&
                 result.map((f) => (
                   <tr key={f}>
                     <td>{f.Timestamp}</td>
                     <td>{f.Actual}</td>
                     <td>{f.Predicted}</td>
                   </tr>
-                ))}
+                ))} */}
             </form>
           </div>
         </div>

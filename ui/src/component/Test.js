@@ -8,7 +8,7 @@ const Form = (props) => {
   const [token, setToken] = useState("");
   const [to, setTo] = useState("");
   const [from, setFrom] = useState("");
-  const [result, setResult] = useState();
+  const [value, setvalue] = useState("");
 
   const insertArticle = () => {
     APIService.InsertArticle({ token, from, to })
@@ -22,19 +22,19 @@ const Form = (props) => {
     setToken("");
     setTo("");
     setFrom("");
+    console.log(token);
   };
-
-  useEffect(() => {
-    fetch("/predict", { method: "GET" }).then((res) =>
-      res
-        .json()
-        .then((data) => {
-          console.log(data);
-          setResult(data);
-        })
-        .catch((err) => console.log(err))
-    );
-  }, []);
+  // useEffect(() => {
+  //   fetch("/predict", { method: "POST" }).then((res) =>
+  //     res
+  //       .json()
+  //       .then((data) => {
+  //         console.log(data);
+  //         setvalue(data);
+  //       })
+  //       .catch((err) => console.log(err))
+  //   );
+  // }, []);
 
   return (
     <div className="grid">
@@ -60,28 +60,37 @@ const Form = (props) => {
       <div className="col-8">
         <div className="container-right">
           <form onSubmit={handleSubmit}>
-          <blockquote className="blockquote" class="fs-1">
-                <p>Get Started</p>
-              </blockquote>
-                <div>
-                  Currency<br></br>
-                  <small class="text-muted">
-                    The selected currency is quoted with U.S. Dollar (USD)
-                  </small>
-                </div>
-                <br></br>
+            <blockquote className="blockquote" class="fs-1">
+              <p>Get Started</p>
+            </blockquote>
+            <div>
+              Currency<br></br>
+              <small class="text-muted">
+                The selected currency is quoted with U.S. Dollar (USD)
+              </small>
+            </div>
+            <br></br>
             <label htmlFor="body" className="form-label">
-              Currency
+              Select
             </label>
-            <input
-              className="form-control"
-              placeholder="currency"
+            <select
+              className="custom-select"
               rows="6"
-              id="token"
-              value={token}
               onChange={(e) => setToken(e.target.value)}
+              value={token}
+              id="token"
               required
-            ></input>
+            >
+              <option label="BTC" name="bitcoin">
+                Bitcoin
+              </option>
+              <option label="BNB" name="binance coin">
+                Binance Coin
+              </option>
+              <option label="ETH" name="ethereum">
+                Ethereum
+              </option>
+            </select>
             <label htmlFor="body" className="form-label">
               From
             </label>
@@ -96,6 +105,7 @@ const Form = (props) => {
             <label htmlFor="body" className="form-label">
               To
             </label>
+            &nbsp;
             <input
               className="form-control"
               placeholder="to"
@@ -104,11 +114,17 @@ const Form = (props) => {
               onChange={(e) => setTo(e.target.value)}
               required
             ></input>
-            <button className="btn btn-primary mt-2 ">predict</button>
-            <Link to="/Predict">&nbsp;
-              <button className="btn btn-primary mt-2 float-right">see result</button>
+            &nbsp;
+            <button className="button">predict</button>&nbsp;
+            <Link
+              to={{
+                pathname: "/Predict",
+              }}
+            >
+              <button className="button">see result</button>
             </Link>
-          </form>{" "}
+            {/* {token} */}
+          </form>
         </div>
       </div>
     </div>
