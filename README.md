@@ -1,4 +1,4 @@
-# react-flask-keras-app
+# react-flask-app
 
 This is the finished project code for the Medium post "Build a simple image classification app using React, Keras, and Flask".
 
