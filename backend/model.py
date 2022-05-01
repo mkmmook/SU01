@@ -88,3 +88,21 @@ def predict(currency, fromDate, toDate):
     print(df)
     df.to_csv('predicted_result.csv')
     return None
+
+# def MAE(Y_actual,Y_Predicted):
+#     mape = np.mean(np.abs((Y_actual - Y_Predicted)/Y_actual))*100
+#     return mape
+# def MSE(Y_actual,Y_Predicted):
+#     mspe = np.mean(np.square(((Y_actual - Y_Predicted) / Y_actual)), axis=0)
+#     return mspe
+# def RMSE(Y_actual,Y_Predicted):
+#     rmspe = np.sqrt(np.mean(np.square(((Y_actual - Y_Predicted) / Y_actual)), axis=0))
+#     return rmspe
+
+# print("Prediction Accuracy")
+# MAPE = MAE(test_label, predicted)
+# print("MAE(%): ", 100-MAPE)
+# MSPE = MSE(test_label, predicted)[0]
+# print("MSE(%): ", 100-MSPE)
+# RMSPE = RMSE(test_label, predicted)[0]
+# print("RMSE(%): ", 100-RMSPE)

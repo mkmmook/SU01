@@ -44,8 +44,5 @@ def display():
     if request.method == "GET":
         data = read_csv('predicted_result.csv')    
         df1 = data.to_json(orient="records")
-        # df2 = read_json('/Users/pcm/Documents/GitHub/frontend/backend/app.py')
-        # print(df2)
-        # df = concat([df1,df2])
         return df1
 
