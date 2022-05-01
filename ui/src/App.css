@@ -181,7 +181,7 @@ body {
   top: 106px;
 }
 
-.form-control {
+.form-control{
   background: #16162a;
   border: 1px solid #52526b;
   color: #f3f3f3;
@@ -449,23 +449,4 @@ th {
   align-self: stretch;
   flex-grow: 0;
   margin: 8px 0px;
-}
-
-.rmse {
-  position: absolute;
-  height: 14px;
-  left: 1138px;
-  top: 140px;
-  width: 150px;
-
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 21px;
-  text-align: right;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-
-  color: #eaeaff;
 }
