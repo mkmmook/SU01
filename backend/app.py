@@ -1,5 +1,6 @@
 from crypt import methods
 from dataclasses import replace
+from heapq import merge
 import imp
 from lib2to3.pgen2 import token
 from locale import currency
@@ -29,23 +30,20 @@ def index(path=''):
     if MODE == 'development':
         return proxyRequest(DEV_SERVER_URL, path)
     else:
-        return render_template("index.html")    
+        return render_template("index.html")
 
-@app.route('/predict', methods = ["POST","GET"])
+
+@app.route('/predict', methods=["POST", "GET"])
 def display():
     if request.method == "POST":
-        # getting input with name = fname in HTML form 
-        currency  = request.json['token']
+        # getting input with name = fname in HTML form
+        currency = request.json['token']
         fromDate = request.json['from']
         toDate = request.json['to']
         # print(currency)
         predict(currency, fromDate, toDate)
         return "None"
     if request.method == "GET":
-        data = read_csv('predicted_result.csv')    
-        df1 = data.to_json(orient="records")
-        # df2 = read_json('/Users/pcm/Documents/GitHub/frontend/backend/app.py')
-        # print(df2)
-        # df = concat([df1,df2])
+        data1 = read_csv('predicted_result.csv')
+        df1 = data1.to_json(orient="records")
         return df1
-

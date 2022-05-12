@@ -90,6 +90,27 @@ const Form = (props) => {
               <option label="ETH" name="ethereum">
                 Ethereum
               </option>
+              <option label="ADA" name="cardano">
+                Cardano
+              </option>
+              <option label="SOL" name="solana">
+                Solana
+              </option>
+              <option label="MATIC" name="polygon">
+                Polygon
+              </option>
+              <option label="LUNA" name="terra">
+                Terra
+              </option>
+              <option label="NEAR" name="NEAR Protocol">
+                NEAR Protocol
+              </option>
+              <option label="DOT" name="polkadot">
+                Polkadot
+              </option>
+              <option label="XRP" name="XRP">
+                XRP
+              </option>
             </select>
             <label htmlFor="body" className="form-label">
               From
