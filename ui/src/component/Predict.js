@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Line } from "react-chartjs-2";
 import logo from "./logo.png";
 import { Link } from "react-router-dom";
 import { Chart as ChartJS } from "chart.js/auto";
-import { useLocation } from "react-router-dom";
 
 const Predict = ({}) => {
   const [result, setResult] = useState();
@@ -163,7 +161,7 @@ const Predict = ({}) => {
       </div>{" "}
       {value.currency}
       <div className="content">
-        {/* <Line data={lineChart} /> */}
+        <Line data={lineChart} />
         <>
           <br></br>
           <div className="panel-body table-responsive">
